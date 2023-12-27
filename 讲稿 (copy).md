@@ -1,0 +1,33 @@
+"Hello everyone, I'm Libiao Chen from China, and I am glad to present our work at the BIBM conference. First, I would like to extend my gratitude to the conference organizers and attendees. It's an honor to share our research with such a distinguished audience, even though I can't be there in person.
+
+Our paper is titled 'A Self-Attention Based DNN Model to Classify Dynamic Functional Connectivity for Autism Spectrum Disorder Diagnosis. This work stands at the intersection of advanced neural network design and the critical field of medical diagnosis, specifically addressing Autism Spectrum Disorder, or we can call it ASD.
+
+ASD is a complex neurodevelopmental disorder that significantly impacts social abilities. Traditional diagnostic methods are often subjective. Our aim was to develop a more objective, data-driven approach using neuroimaging and deep learning method.
+
+Machine learning algorithms such as SVM、LDA and random forest model are widely employed for mental disorder classification tasks. However, due to the characteristics of high dimension and small sample size of  functional connectivity data, the simple structure of machine learning algorithms restrict the further improvement of the classification performance.
+
+Deep learning methods can automatically learn multiple abstract high-level features from the initial input, and has been employed to classify functional connectivity patterns in recent studies. However, current studies on ASD diagnosis mainly use static functional connectivity data. This assumes a constant brain state during the test, which ignores the potential dynamic changes in brain activation patterns over time. To address this problem, this study proposed a novel self-attention based DNN model to classify dynamic functional connectivity  for ASD diagnosis. 
+
+In this model, we constructed dynamic functional connectivity data through silding window method and extracted /ɪkˈstræktɪd/ features using Kendall’s rank  /kɔːr.əˈleɪ.ʃən/. A DNN model with multi-head self-attention layers was proposed to extract high-level spatial /ˈspeɪ.ʃəl/ and temporal /ˈtɛm.pə.rəl/features from various subspaces. What's more, we designed disagreement regularization term combined with cross entropy loss for classification.
+
+The dataset we used is from ABIDE, a public dataset. After removing data with too short collection times, our work includes six hundred seventy-four samples, which includes three hundred six ASD patients and three hundred sixty-eight healthy controls. We used two templates, AAL and CC two hundred, to divide the brain into several regions of interest, which can be called ROI.
+
+We used a sliding window method to build dynamic functional connectivity. The raw data is a matrix where the
+
+ horizontal /ˌhɔːr.ɪˈzɑːn.təl/ axis represents /rɛ.prɪˈzɛnts/time and the vertical axis represents different brain regions. The values in the matrix indicate the BOLD signal value of a brain region at a specific time point. We use a fixed-size window that moves along the time dimension. Assuming the window length is thirty, and it shifts by one time point each step, the first extracted /ɪkˈstræktɪd/ sub-matrix would have time indices from 0 to twenty-nine, and the second one from one to thirty, and so on, until the window move to the end of the matrix.
+
+Then, for each sub-matrix, we use the Pearson correlation /kɔːr.əˈleɪ.ʃən/  to calculate the 
+
+correlation /kɔːr.əˈleɪ.ʃən/between every two brain regions. For AAL, which has one hundred sixteen brain regions, the corresponding /kɔːr.əˈspɑːn.dɪŋ/ vector length is Six thousand six hundred seventy. Afterwards, we concatenate the correlation/kɔːr.əˈleɪ.ʃən/  vectors from all windows together to form the input for the model.
+
+However, such high data dimensions are too large for a few hundred data points. Therefore, we use the Kendall rank correlation  /kɔːr.əˈleɪ.ʃən/  for feature extraction. The advantage of this method is that while we reduce the number of features, we do not alter the original data. This provides a basis for us to later identify the brain region connections most relevant to ASD.
+
+After feature extraction, the data is fed into a multi-head self-attention layer. The self-attention mechanism is a breakthrough concept in the field of deep learning. It allows a model to balance the significance of different parts of the input data differently. self-attention works by generating three vectors for each input: a query (Q), a key (K), and a value (V). These vectors are derived from the input data using learned weights. The mechanism then calculates the dot product of the query with all keys to create a score, indicating how much focus to put on other parts of the input for each part.
+
+These scores are then scaled down, passed through a softmax function to turn them into `	`, and used to measure the value vectors. This process results in an output vector for each input, which is a weighted sum of all values, giving more weight to the more relevant parts.
+
+The multi-head self-attention layer focus on different information by executing/ˈɛk.sɪ.kjuː.tɪŋ/ in multiple sub-spaces. We also introduced the cosine similarity between different heads in the loss function to increase the diversity /daɪˈvɜːr.sɪ.ti/of information captured by each head. Unlike the usual self-attention mechanism, we did not keep the dimensions of the Query, Key, and Value vector the same. In fact, we reduced the dimension of the Value vector, making the output dimension of the self-attention layer smaller than the input. Also, we stacked multiple  multi-head self-attention layers to capture higher-order  spatial /ˈspeɪ.ʃəl/ and temporal /ˈtɛm.pə.rəl/ features. Between layers, we used feedforward neural networks combined with residual /ˈrɛz.ɪ.dʒu.əl/networks to capture deeper correlations. Finally, we used a fully connected layer as a classifier to obtain the classification results.
+
+Systematic experiments/ɪkˈspɛr.ɪ.mənts/ were conducted on the ABIDE dataset. The proposed model achieved average accuracy of seventy-nine point six five percent for for 10-fold  cross-validation and seventy-eight point four seven percent for inter-site cross-validation, outperforming similar studies for ASD classification. We also identified the discriminative functional connections associated with ASD classification.
+
+This is a brief introduction to our work. Once again, I would like to express my gratitude for this opportunity to share our research with you.
